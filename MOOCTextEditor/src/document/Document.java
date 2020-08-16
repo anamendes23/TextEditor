@@ -67,7 +67,33 @@ public abstract class Document {
 		// TODO: Implement this method so that you can call it from the 
 	    // getNumSyllables method in BasicDocument (module 2) and 
 	    // EfficientDocument (module 3).
-	    return 0;
+		if(word.length() == 1) return 1;
+
+		boolean foundVowelPreviously = false;
+		int count = 0;
+
+		for(int i = 0; i < word.length(); i++) {
+
+			if(foundVowelPreviously) {
+				if(!isVowel(word.charAt(i))) {
+					foundVowelPreviously = false;
+				}
+			}
+			else if(isVowel(word.charAt(i))) {
+				if(i != word.length() - 1) {
+					count++;
+				} else if (word.charAt(i) != 'e') {
+					count++;
+				}
+				foundVowelPreviously = true;
+			}
+		}
+
+	    return count;
+	}
+
+	private boolean isVowel(char c) {
+		return "AEIOUYaeiouy".indexOf(c) != -1;
 	}
 	
 	/** A method for testing
@@ -132,7 +158,12 @@ public abstract class Document {
 	{
 	    // TODO: You will play with this method in week 1, and 
 		// then implement it in week 2
-	    return 0.0;
+		int words = getNumWords();
+		int sentences = getNumSentences();
+		int syllabes = getNumSyllables();
+		double score = 206.835 - 1.015*((double)words/sentences) - (84.6*((double)syllabes/words));
+
+	    return score;
 	}
 	
 	
