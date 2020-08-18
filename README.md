@@ -8,3 +8,9 @@ In order to learn and apply this concept, the Flesch index calculation was imple
 The Flesch index express how easy or difficult a text is to read. High Flesch indexes (>90) indicate easy to read and low indexes (<30) indicate difficult to read.
 
 Within Strings, regular expressions were utilized to split the text into words, sentences, and syllabes to then calculate the Flesch index score.
+
+## Concept: Big O
+
+This concept is covered to explain the importance in performance when developing applications. To visually represent that, a class DocumentBenchmarking was implemented to measure and compare the performance of the method to calculate the Flesch score implemented in the classes BasicDocument and EfficientDocument.
+
+
