@@ -32,7 +32,9 @@ In the project, the Linked List is the data structure chosen to create a Markov 
 Generics were the type parameter choice when writing the class ListNode<T>, that way the LinkedList can hold any type of data.
 When writing classes, the designer has to expect the user to enter "bad input". To prevent the code from breaking, the designer should check for bad input and throw exceptions that stops normal program execution and indicate the user exactly where the program went wrong.
 
-## Concept: Testing and Correctness
+## Testing and Correctness
 
-Unit tests were written to validate the correctness of the text editor and its tools.
+The course covers the importance of testing your code to increase confidence in the correctness of its functionality. Unit tests were written to validate the correctness of the text editor and its tools.
+
+
 
