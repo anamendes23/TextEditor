@@ -59,7 +59,6 @@ public class MyLinkedListTester {
 			fail("Check out of bounds");
 		}
 		catch (IndexOutOfBoundsException e) {
-			
 		}
 		
 		// test short list, first contents, then out of bounds
@@ -71,14 +70,12 @@ public class MyLinkedListTester {
 			fail("Check out of bounds");
 		}
 		catch (IndexOutOfBoundsException e) {
-		
 		}
 		try {
 			shortList.get(2);
 			fail("Check out of bounds");
 		}
 		catch (IndexOutOfBoundsException e) {
-		
 		}
 		// test longer list contents
 		for(int i = 0; i<LONG_LIST_LENGTH; i++ ) {
@@ -91,7 +88,6 @@ public class MyLinkedListTester {
 			fail("Check out of bounds");
 		}
 		catch (IndexOutOfBoundsException e) {
-		
 		}
 		try {
 			longerList.get(LONG_LIST_LENGTH);
@@ -109,12 +105,33 @@ public class MyLinkedListTester {
 	@Test
 	public void testRemove()
 	{
+		LLNode<Integer> head = list1.getNodeAtIndex(0).getPrev();
 		int a = list1.remove(0);
 		assertEquals("Remove: check a is correct ", 65, a);
 		assertEquals("Remove: check element 0 is correct ", (Integer)21, list1.get(0));
 		assertEquals("Remove: check size is correct ", 2, list1.size());
-		
+		assertEquals("Remove: check prev of 0 is head", head, list1.getNodeAtIndex(0).getPrev());
 		// TODO: Add more tests here
+		try {
+			emptyList.remove(0);
+			fail("Check out of bounds.");
+		}
+		catch (IndexOutOfBoundsException e) {
+		}
+
+		try {
+			shortList.remove(-1);
+			fail("Check out of bounds.");
+		}
+		catch (IndexOutOfBoundsException e) {
+		}
+
+		try {
+			shortList.remove(2);
+			fail("Check out of bounds.");
+		}
+		catch (IndexOutOfBoundsException e) {
+		}
 	}
 	
 	/** Test adding an element into the end of the list, specifically
@@ -124,7 +141,13 @@ public class MyLinkedListTester {
 	public void testAddEnd()
 	{
         // TODO: implement this test
-		
+		LLNode<Integer> lastNode = list1.getNodeAtIndex(2);
+		boolean add = list1.add(100);
+		assertEquals("Add: is element at 2 still 42", (Integer)42, list1.get(2));
+		assertEquals("Add: check size is now 4", 4, list1.size());
+		assertEquals("Add: check element at 3 is 100", (Integer)100, list1.get(3));
+		assertEquals("Add: check new node next is tail", list1.getTail(), list1.getNodeAtIndex(3).getNext());
+		assertEquals("Add: check new node prev is 42", lastNode, list1.getNodeAtIndex(3).getPrev());
 	}
 
 	

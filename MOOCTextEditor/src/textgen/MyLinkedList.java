@@ -118,8 +118,12 @@ public class MyLinkedList<E> extends AbstractList<E> {
 		return oldElement;
 	}
 
-	private LLNode<E> getNodeAtIndex(int index) {
-		if(index < 0 || index > size)
+	public LLNode<E> getNodeAtIndex(int index) {
+
+		if(size == 0)
+			throw new IndexOutOfBoundsException("Linked List is empty.");
+
+		if(index < 0 || index >= size)
 			throw new IndexOutOfBoundsException("Enter index between 0 and " + (size - 1));
 
 		LLNode<E> lookupNode = null;
@@ -132,6 +136,9 @@ public class MyLinkedList<E> extends AbstractList<E> {
 
 		return lookupNode;
 	}
+
+	public LLNode<E> getHead() { return this.head; }
+	public LLNode<E> getTail() { return this.tail; }
 }
 
 class LLNode<E> 
