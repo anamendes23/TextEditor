@@ -105,12 +105,11 @@ public class MyLinkedListTester {
 	@Test
 	public void testRemove()
 	{
-		LLNode<Integer> head = list1.getNodeAtIndex(0).getPrev();
 		int a = list1.remove(0);
 		assertEquals("Remove: check a is correct ", 65, a);
 		assertEquals("Remove: check element 0 is correct ", (Integer)21, list1.get(0));
 		assertEquals("Remove: check size is correct ", 2, list1.size());
-		assertEquals("Remove: check prev of 0 is head", head, list1.getNodeAtIndex(0).getPrev());
+		//assertEquals("Remove: check prev of 0 is head", list1.head(), list1.prev(0));
 		// TODO: Add more tests here
 		try {
 			emptyList.remove(0);
@@ -141,13 +140,20 @@ public class MyLinkedListTester {
 	public void testAddEnd()
 	{
         // TODO: implement this test
-		LLNode<Integer> lastNode = list1.getNodeAtIndex(2);
-		boolean add = list1.add(100);
+		//LLNode<Integer> lastNode = list1.tail().prev();
+		list1.add(100);
 		assertEquals("Add: is element at 2 still 42", (Integer)42, list1.get(2));
 		assertEquals("Add: check size is now 4", 4, list1.size());
 		assertEquals("Add: check element at 3 is 100", (Integer)100, list1.get(3));
-		assertEquals("Add: check new node next is tail", list1.getTail(), list1.getNodeAtIndex(3).getNext());
-		assertEquals("Add: check new node prev is 42", lastNode, list1.getNodeAtIndex(3).getPrev());
+		//assertEquals("Add: check new node next is tail", list1.tail(), list1.next(3));
+		//assertEquals("Add: check new node prev is 42", lastNode, list1.prev(3));
+
+		try {
+			list1.add(null);
+			fail("Check null pointers.");
+		}
+		catch (NullPointerException e) {
+		}
 	}
 
 	
@@ -156,9 +162,11 @@ public class MyLinkedListTester {
 	public void testSize()
 	{
 		// TODO: implement this test
+		assertEquals(0, emptyList.size());
+		assertEquals(3, list1.size());
+		assertEquals(LONG_LIST_LENGTH, longerList.size());
 	}
 
-	
 	
 	/** Test adding an element into the list at a specified index,
 	 * specifically:
@@ -168,7 +176,36 @@ public class MyLinkedListTester {
 	public void testAddAtIndex()
 	{
         // TODO: implement this test
-		
+		Integer movedNode = list1.get(2);
+		//LLNode<Integer> prevNode = list1.prev(2);
+		list1.add(2, 100);
+
+		assertEquals("Add: is element at 2 now 100", (Integer)100, list1.get(2));
+		assertEquals("Add: check size is now 4", 4, list1.size());
+		//assertEquals("Add: check that prevNode is now previous of new node", prevNode, list1.prev(2));
+		assertEquals("Add: check new node next is movedNode", movedNode, list1.get(3));
+		//assertEquals("Add: check that addedNode is now previous of movedNode", prevNode.next(), list1.prev(3));
+		//assertEquals("Add: check new node next is prevNode", (Integer)100, prevNode.next().getData());
+
+		try {
+			list1.add(list1.size(), 200);
+			fail("Check out of bounds");
+		}
+		catch (IndexOutOfBoundsException e){
+		}
+
+		try {
+			list1.add(-1, 200);
+			fail("Check out of bounds.");
+		}
+		catch (IndexOutOfBoundsException e) {
+		}
+		try {
+			list1.add(null);
+			fail("Check null pointers.");
+		}
+		catch (NullPointerException e) {
+		}
 	}
 	
 	/** Test setting an element in the list */
@@ -176,10 +213,47 @@ public class MyLinkedListTester {
 	public void testSet()
 	{
 	    // TODO: implement this test
-	    
+	    Integer newElement = 100;
+	    Integer oldElement = list1.set(0,100);
+
+	    assertEquals(newElement, list1.get(0));
+	    assertEquals((Integer)65, oldElement);
+
+	    try {
+	    	list1.set(-1,100);
+	    	fail("Check out of bounds.");
+		}
+	    catch (IndexOutOfBoundsException e){
+		}
+	    try {
+	    	list1.set(20, 100);
+	    	fail("Check out of bounds.");
+		}
+	    catch (IndexOutOfBoundsException e) {
+		}
+	    try {
+	    	 list1.set(0, null);
+	    	 fail("Check null pointers.");
+		}
+	    catch (NullPointerException e) {
+		}
 	}
 	
 	
 	// TODO: Optionally add more test methods.
-	
+	/** Test getting head */
+	/*@Test
+	public void testGetHead() {
+
+		assertEquals(list1.prev(0), list1.head());
+		assertNotEquals(null, emptyList.head());
+	}
+
+	*//** Test getting tail *//*
+	@Test
+	public void testGetTail() {
+
+		assertEquals(list1.next(list1.size() -1), list1.tail());
+		assertNotEquals(null, emptyList.tail());
+	}*/
 }

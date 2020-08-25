@@ -35,9 +35,9 @@ public class MyLinkedList<E> extends AbstractList<E> {
 			throw new NullPointerException("Linked List object cannot store null pointers.");
 
 		LLNode<E> newNode = new LLNode<E>(element);
-		newNode.setPrev(tail.getPrev());
+		newNode.setPrev(tail.prev());
 		newNode.setNext(tail);
-		tail.getPrev().setNext(newNode);
+		tail.prev().setNext(newNode);
 		tail.setPrev(newNode);
 
 		size++;
@@ -47,7 +47,7 @@ public class MyLinkedList<E> extends AbstractList<E> {
 
 	/** Get the element at position index 
 	 * @throws IndexOutOfBoundsException if the index is out of bounds. */
-	public E get(int index) 
+	public E get(int index)
 	{
 		// TODO: Implement this method.
 		LLNode<E> lookupNode = getNodeAtIndex(index);
@@ -63,12 +63,20 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	public void add(int index, E element ) 
 	{
 		// TODO: Implement this method
+		if(element == null)
+			throw new NullPointerException("Linked List object cannot store null pointers.");
+
+		if(size == 0) {
+			add(element);
+			return;
+		}
+
 		LLNode<E> atIndex = getNodeAtIndex(index);
 		LLNode<E> newNode = new LLNode<E>(element);
 
-		newNode.setPrev(atIndex.getPrev());
+		newNode.setPrev(atIndex.prev());
 		newNode.setNext(atIndex);
-		atIndex.getPrev().setNext(newNode);
+		atIndex.prev().setNext(newNode);
 		atIndex.setPrev(newNode);
 
 		size++;
@@ -93,8 +101,8 @@ public class MyLinkedList<E> extends AbstractList<E> {
 		// TODO: Implement this method
 		LLNode<E> atIndex = getNodeAtIndex(index);
 
-		atIndex.getPrev().setNext(atIndex.getNext());
-		atIndex.getNext().setPrev(atIndex.getPrev());
+		atIndex.prev().setNext(atIndex.next());
+		atIndex.next().setPrev(atIndex.prev());
 
 		size--;
 
@@ -111,6 +119,9 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	public E set(int index, E element) 
 	{
 		// TODO: Implement this method
+		if(element == null)
+			throw new NullPointerException("Null elements are not acceptable.");
+
 		LLNode<E> atIndex = getNodeAtIndex(index);
 		E oldElement = atIndex.getData();
 		atIndex.setData(element);
@@ -130,15 +141,17 @@ public class MyLinkedList<E> extends AbstractList<E> {
 		LLNode<E> startNode = head;
 
 		for(int i = 0; i <= index; i ++) {
-			lookupNode = startNode.getNext();
-			startNode = startNode.getNext();
+			lookupNode = startNode.next();
+			startNode = startNode.next();
 		}
 
 		return lookupNode;
 	}
 
-	public LLNode<E> getHead() { return this.head; }
-	public LLNode<E> getTail() { return this.tail; }
+	public LLNode<E> head() { return this.head; }
+	public LLNode<E> tail() { return this.tail; }
+	public LLNode<E> prev(int index) { return getNodeAtIndex(index).prev(); }
+	public LLNode<E> next(int index) { return getNodeAtIndex(index).next(); }
 }
 
 class LLNode<E> 
@@ -175,7 +188,7 @@ class LLNode<E>
 		this.data = data;
 	}
 
-	public LLNode<E> getNext() { return this.next; }
-	public LLNode<E> getPrev() { return this.prev; }
+	public LLNode<E> next() { return this.next; }
+	public LLNode<E> prev() { return this.prev; }
 	public E getData() { return this.data; }
 }
