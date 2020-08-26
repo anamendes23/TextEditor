@@ -41,3 +41,8 @@ The course covers the importance of testing your code to increase confidence in 
 The course goes over an introduction to Trees, specifying BT (Binary Tree), which will be used to understand the concept of BST (Binary Search Tree) and its run time analysis. The course also shows all types of traversals. Finally, Tries are introduced and implemented in the project to store a dictionary.
 The dictionary words will be used in the auto-compleating feature of the Text Editor.
 
+## Hash Maps (or Tables)
+
+
+Hash Tables are very useful data structure. The course explains what they are, why collisions are important, and some applications.
+The Hash Table will be used to implement the speller suggestion feature on the Text Editor.
