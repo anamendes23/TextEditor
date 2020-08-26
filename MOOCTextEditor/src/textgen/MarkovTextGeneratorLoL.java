@@ -37,6 +37,8 @@ public class MarkovTextGeneratorLoL implements MarkovTextGenerator {
 			throw new NullPointerException("Please enter a valid text source. Nulls are not accepted.");
 		}
 
+        if(sourceText.equals("")) return;
+
 		String[] words = sourceText.split("[ ]+");
 		starter = words[0];
 		String prevWord = starter;
