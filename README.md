@@ -36,5 +36,8 @@ When writing classes, the designer has to expect the user to enter "bad input". 
 
 The course covers the importance of testing your code to increase confidence in the correctness of its functionality. Unit tests were written to validate the correctness of the text editor and its tools.
 
+## Trees
 
+The course goes over an introduction to Trees, specifying BT (Binary Tree), which will be used to understand the concept of BST (Binary Search Tree) and its run time analysis. The course also shows all types of traversals. Finally, Tries are introduced and implemented in the project to store a dictionary.
+The dictionary words will be used in the auto-compleating feature of the Text Editor.
 
